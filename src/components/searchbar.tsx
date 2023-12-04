@@ -4,7 +4,7 @@ import ReactSearchBox from "react-search-box";
 const Searchbar = () => {
   return (
     <>
-      <div className="w-96">
+      <div className="w-96 border-transparent rounded-md border-2 border-black">
       <ReactSearchBox
         placeholder="Search"
         data={[]}
