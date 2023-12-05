@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Switch from "@mui/material/Switch";
 
-const label = { inputProps: { 'aria-label': 'Switch demo' } };
+const label = { inputProps: { "aria-label": "Switch demo" } };
 
 const Profile = () => {
   const [formData, setFormData] = useState({
@@ -24,21 +24,24 @@ const Profile = () => {
   };
   return (
     <>
-      <div className="container m-auto grid place-items-center font-sans mt-8">
-        <label htmlFor="name">Choose file to Upload:</label>
+      <div className="container m-auto grid place-items-center font-sans text-xs mt-8">
+        <label className="text-xl" htmlFor="name">Choose file to Upload:</label>
         <input
-          className="mb-4 h-12 pl-28 mt-4"
+          className="mb-4 h-8 pl-28 mt-4"
           type="file"
           id="file"
           name="file"
           value={formData.file}
           onChange={handleChange}
         />
-        <p><span>Sponsored?  </span><Switch {...label} /></p>
+        <p>
+          <span>Sponsored? </span>
+          <Switch {...label} />
+        </p>
         <form className="flex flex-col w-96" onSubmit={handleSubmit}>
           <label htmlFor="name">Name:</label>
           <input
-            className="border-2 border-solid border-black rounded-lg mb-4 h-12 pl-2"
+            className="border-2 border-solid border-black rounded-lg mb-4 h-8 pl-2"
             placeholder="Video Title..."
             type="text"
             id="title"
@@ -49,7 +52,7 @@ const Profile = () => {
 
           <label htmlFor="email">Email:</label>
           <textarea
-            className="border-2 border-solid border-black rounded-lg mb-4 h-12 pl-2 pt-2"
+            className="border-2 border-solid border-black rounded-lg mb-4 h-8 pl-2 pt-2"
             placeholder="Video Description..."
             id="description"
             name="description"
@@ -59,7 +62,7 @@ const Profile = () => {
 
           <label htmlFor="message">Tagst:</label>
           <input
-            className="border-2 border-solid border-black rounded-lg mb-4 h-12 pl-2"
+            className="border-2 border-solid border-black rounded-lg mb-4 h-8 pl-2"
             placeholder="Tags..."
             type="tags"
             id="tags"
@@ -69,7 +72,7 @@ const Profile = () => {
           />
           <div className="grid place-items-center">
             <button
-              className="border-2 border-solid border-sky-600 bg-sky-200 rounded-lg p-2 uppercase mb-4"
+              className="border-2 border-solid border-sky-600 bg-sky-200 rounded-lg p-2 uppercase mb-4 hover:bg-sky-500 hover:text-slate-100"
               type="submit"
             >
               Submit

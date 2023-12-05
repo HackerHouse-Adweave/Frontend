@@ -8,7 +8,7 @@ const Videotab = () => {
     <div className="pb-8">
       <div className="pt-8 flex flex-row gap-x-12">
         <a href="#/videoplayer/">
-          <div className="w-80">
+          <div className="w-80 cursor-pointer">
             <img
               className="w-80 h-40 mb-4 rounded-lg"
               src={amazingVideo}
@@ -27,7 +27,7 @@ const Videotab = () => {
             </div>
           </div>
         </a>
-        <div className="w-80">
+        <div className="w-80 cursor-pointer">
           <img
             className="w-80 h-40 mb-4 rounded-lg"
             src={videoCard2}
@@ -45,7 +45,7 @@ const Videotab = () => {
             </div>
           </div>
         </div>
-        <div className="w-80">
+        <div className="w-80 cursor-pointer">
           <img
             className="w-80 h-40 mb-4 rounded-lg"
             src={videoCard3}
@@ -65,7 +65,7 @@ const Videotab = () => {
         </div>
       </div>
       <div className="pt-8 flex flex-row gap-x-12">
-        <div className="w-80">
+        <div className="w-80 cursor-pointer">
           <img
             className="w-80 h-40 mb-4 rounded-lg"
             src={videoCard}
@@ -83,7 +83,7 @@ const Videotab = () => {
             </div>
           </div>
         </div>
-        <div className="w-80">
+        <div className="w-80 cursor-pointer">
           <img
             className="w-80 h-40 mb-4 rounded-lg"
             src={videoCard2}
@@ -101,7 +101,7 @@ const Videotab = () => {
             </div>
           </div>
         </div>
-        <div className="w-80">
+        <div className="w-80 cursor-pointer">
           <img
             className="w-80 h-40 mb-4 rounded-lg"
             src={videoCard3}
@@ -121,7 +121,7 @@ const Videotab = () => {
         </div>
       </div>
       <div className="pt-8 flex flex-row gap-x-12">
-        <div className="w-80">
+        <div className="w-80 cursor-pointer">
           <img
             className="w-80 h-40 mb-4 rounded-lg"
             src={videoCard}
@@ -139,7 +139,7 @@ const Videotab = () => {
             </div>
           </div>
         </div>
-        <div className="w-80">
+        <div className="w-80 cursor-pointer">
           <img
             className="w-80 h-40 mb-4 rounded-lg"
             src={videoCard2}
@@ -157,7 +157,7 @@ const Videotab = () => {
             </div>
           </div>
         </div>
-        <div className="w-80">
+        <div className="w-80 cursor-pointer">
           <img
             className="w-80 h-40 mb-4 rounded-lg"
             src={videoCard3}

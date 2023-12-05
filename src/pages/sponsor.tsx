@@ -22,15 +22,15 @@ const Sponsor = () => {
 
   return (
     <>
-      <div className="container m-auto mt-8 grid place-items-center font-sans text-xl">
+      <div className="container m-auto mt-8 grid place-items-center font-sans text-xs">
         <div className="mb-4">
-          <p>To become a Sponsor, provide all the details below</p>
+          <p className="text-xl">To become a Sponsor, provide all the details below</p>
         </div>
         <div className="grid place-items-center">
           <form className="flex flex-col w-96" onSubmit={handleSubmit}>
             <label htmlFor="name">Name:</label>
             <input
-              className="border-2 border-solid border-black rounded-lg mb-4 h-12 pl-2"
+              className="border-2 border-solid border-black rounded-lg mb-4 h-8 pl-2"
               placeholder="Name..."
               type="text"
               id="name"
@@ -41,7 +41,7 @@ const Sponsor = () => {
 
             <label htmlFor="email">Email:</label>
             <input
-              className="border-2 border-solid border-black rounded-lg mb-4 h-12 pl-2"
+              className="border-2 border-solid border-black rounded-lg mb-4 h-8 pl-2"
               placeholder="Email..."
               type="email"
               id="email"
@@ -52,7 +52,7 @@ const Sponsor = () => {
 
             <label htmlFor="message">Sponsoring Amount:</label>
             <input
-              className="border-2 border-solid border-black rounded-lg mb-4 h-12 pl-2"
+              className="border-2 border-solid border-black rounded-lg mb-4 h-8 pl-2"
               placeholder="Sponsoring Amount..."
               id="number"
               name="number"
@@ -62,7 +62,7 @@ const Sponsor = () => {
 
             <label htmlFor="message">Media:</label>
             <input
-              className="border-2 border-solid border-black rounded-lg mb-4 h-12 pl-2"
+              className="border-2 border-solid border-black rounded-lg mb-4 h-8 pl-2"
               placeholder="Link to Media..."
               id="message"
               name="message"
@@ -72,7 +72,7 @@ const Sponsor = () => {
 
             <div className="grid place-items-center">
               <button
-                className="border-2 border-solid border-sky-600 bg-sky-200 rounded-lg p-2 uppercase mb-4"
+                className="border-2 border-solid border-sky-600 bg-sky-200 rounded-lg p-2 uppercase mb-4 hover:bg-sky-500 hover:text-slate-100"
                 type="submit"
               >
                 Submit
