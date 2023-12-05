@@ -5,6 +5,8 @@ import "./App.css";
 import Adweave from "./pages/homePage";
 import Upload from "./pages/upload";
 import Profile from "./pages/profile";
+import VideoPlayer from "./pages/videoplayer";
+import Sponsor from "./pages/sponsor";
 
 function App() {
   return (
@@ -13,7 +15,9 @@ function App() {
       <Routes>
         <Route path={"/"} element={<Adweave/>}/>
         <Route path={"/upload"} element={<Upload/>}/>
+        <Route path={"/sponsor"} element={<Sponsor/>}/>
         <Route path={"/profile"} element={<Profile/>}/>
+        <Route path={"/videoPlayer"} element={<VideoPlayer/>}/>
       </Routes>
     </HashRouter>
   );

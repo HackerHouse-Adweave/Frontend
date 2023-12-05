@@ -1,7 +1,9 @@
 const Sponsor = () => {
     return (
         <>
-            <p>Sonsor</p>
+            <div>
+                <p>To become a Sponsor, provide all the details below</p>
+            </div>
         </>
     )
 }

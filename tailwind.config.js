@@ -8,7 +8,8 @@ module.exports = {
       fontFamily:{
         sans:['Poppins', 'sans-serif'],
         mont:['Montserrat', 'sans-serif'],
-        alternate: ['Montserrat Alternates', 'sans-serif']
+        alternate: ['Montserrat Alternates', 'sans-serif'],
+        josefin: ['Josefin Sans', 'sans-serif']
       }
     },
   },
