@@ -2,7 +2,7 @@ import videoCard from "../Images/videoCard1.png";
 import { FaCircleInfo } from "react-icons/fa6";
 import videoCard2 from "../Images/videoCard2.jpeg";
 import videoCard3 from "../Images/videoCard3.jpeg";
-
+import amazingVideo from "../Images/amazingVideo.png";
 const Videotab = () => {
   return (
     <div className="pb-8">
@@ -11,14 +11,14 @@ const Videotab = () => {
           <div className="w-80">
             <img
               className="w-80 h-40 mb-4 rounded-lg"
-              src={videoCard}
-              alt="video1"
+              src={amazingVideo}
+              alt="amazingVideo"
             />
             <div className="text-xs">
               <p className="text-md font-extrabold text-justify">
-                Building a Dapp on Arweave with Tom Wilson
+                Amazing Video
               </p>
-              <p>Arweave India</p>
+              <p>Amazing People</p>
               <div className="w-72 flex flex-row gap-x-2 text-slate-600">
                 <p>100k views</p>
                 <p className="">05/12/2023</p>
