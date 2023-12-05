@@ -1,8 +1,12 @@
+import Videotab from "../components/videotab";
+
 const Adweave = () => {
   return (
     <>
-      <div className="w-full h-screen bg-green-200">
-        <p>Adweave</p>
+      <div className="bg-slate-100">
+        <div className="container mx-auto">
+          <Videotab />
+        </div>
       </div>
     </>
   );
