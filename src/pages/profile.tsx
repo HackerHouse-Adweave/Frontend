@@ -1,10 +1,81 @@
 import { useState } from "react";
 import Switch from "@mui/material/Switch";
 import { IoArrowBackCircle } from "react-icons/io5";
+import WebIrys from "@irys/sdk";
+import Irys from "@irys/sdk";
+// import * as fs from "fs";
+// import dotenv from "dotenv";
+// dotenv.config();
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
 const Profile = () => {
+
+ 
+//   // Returns a reference to an Irys node
+//   const getIrys = async () => {
+//     const url = "https://devnet.irys.xyz";
+//     // Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
+//     const providerUrl = "";
+//     const token = "matic";
+//     const privateKey = process.env.PRIVATE_KEY;
+  
+//     const irys = new Irys({
+//       url, // URL of the node you want to connect to
+//       token, // Token used for payment
+//       key: privateKey, // ETH or SOL private key
+//       config: { providerUrl: providerUrl }, // Optional provider URL, only required when using Devnet
+//     });
+//     return irys;
+//   };
+ 
+// const uploadImage = async () => {
+// 	const irys = await getIrys();
+// 	const fileToUpload = "./myNFT.png";
+ 
+// 	// Get size of file
+// 	const { size } = await fs.promises.stat(fileToUpload);
+// 	// Get cost to upload "size" bytes
+// 	const price = await irys.getPrice(size);
+// 	console.log(`Uploading ${size} bytes costs ${irys.utils.fromAtomic(price)} ${token}`);
+// 	// Fund the node
+// 	await irys.fund(price);
+ 
+// 	// Upload metadata
+// 	try {
+// 		const response = await irys.uploadFile(fileToUpload);
+// 		console.log(`File uploaded ==> https://gateway.irys.xyz/${response.id}`);
+// 	} catch (e) {
+// 		console.log("Error uploading file ", e);
+// 	}
+// };
+
+//   const getWebIrys = async () => {
+//     const arconnect = window.arweaveWallet;
+//     // await arconnect.connect(["ACCESS_ADDRESS", "ACCESS_PUBLIC_KEY", "SIGN_TRANSACTION", "SIGNATURE"]);
+//     const webIrys = new WebIrys({ url: "https://node1.irys.xyz", token: "arweave", wallet: { provider: arconnect } });
+//     await webIrys.ready();
+   
+//     return webIrys;
+//   };
+
+//   const fundIrysNode = async () => {
+//     try{
+//       const irys = await getWebIrys();
+      
+//       console.log(`wallet address = ${irys.address}`);
+//       try {
+//         const fundTx = await irys.fund(irys.utils.toAtomic(0.00000001));
+//         console.log(`Successfully funded ${irys.utils.fromAtomic(fundTx.quantity)} ${irys.token}`);
+//       } catch (e) {
+//         console.log("Error funding IrysNode ", e);
+//       }
+//     }catch(err){
+//       console.log(err)
+//     }
+//   }
+
+
   const [formData, setFormData] = useState({
     file: "",
     title: "",

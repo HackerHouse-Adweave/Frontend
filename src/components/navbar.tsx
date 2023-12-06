@@ -6,6 +6,15 @@ import colors from "@mui/material/colors";
 import { createTheme } from "@mui/material/styles";
 import User from "./user";
 import logo from "../Images/logo.png";
+import Arweave from "arweave";
+
+// create arweave client
+const arweave = new Arweave({
+  host: "ar-io.net",
+  port: 443,
+  protocol: "https"
+});
+
 
 const theme = createTheme({
   palette: {
@@ -31,6 +40,48 @@ const style = {
 };
 
 const Navbar = () => {
+  const [userAddress, setUserAddress] = useState<string | undefined>(undefined);
+
+  const connectWallet = async () => {
+    try{
+      // connect to the extension
+      const res = await window.arweaveWallet.connect(
+        // request permissions to read the active address
+        ["ACCESS_ADDRESS", "SIGN_TRANSACTION", "DISPATCH", "ACCESS_PUBLIC_KEY", "ACCESS_ALL_ADDRESSES", "ACCESS_ARWEAVE_CONFIG", "SIGNATURE"],
+        // provide some extra info for our app
+        {
+          name: "AdWeave App",
+          // logo: "https://arweave.net/jAvd7Z1CBd8gVF2D6ESj7SMCCUYxDX_z3vpp5aHdaYk"
+        },
+        // custom gateway
+        {
+          host: "g8way.io",
+          port: 443,
+          protocol: "https"
+        }
+      );
+      console.log(res);
+      const userAddress = await window.arweaveWallet.getActiveAddress();
+      console.log(userAddress);
+      setUserAddress(userAddress);
+
+    }catch(err){
+      console.log(err)
+    }
+
+  }
+
+  const disconnectWallet = async () => {
+    try{
+      // disconnect from the extension
+      const res = await window.arweaveWallet.disconnect();
+      console.log(res);
+      setUserAddress("");
+    }catch(err){
+      console.log(err)
+    }
+  }
+
   return (
     <>
       <div className="grid place-items-center sticky top-0 h-16 bg-slate-100">
@@ -48,21 +99,42 @@ const Navbar = () => {
               <a href="#/sponsor/">Sponsor</a>
             </li>
             <li>
-              <Button
-                sx={{
-                  color: "#039be5",
-                  border: "1px solid #039be5",
-                  fontWeight: "extrabold",
-                  fontFamily: "Montserrat, sans-serif",
-                  "&:hover": {
-                    color: "#eceff1",
-                    backgroundColor: "#03a9f4",
-                  },
-                }}
-                variant="outlined"
-              >
-                Login
-              </Button>
+              {
+                userAddress?
+                  <Button
+                  onClick={disconnectWallet}
+                  sx={{
+                    color: "#039be5",
+                    border: "1px solid #039be5",
+                    fontWeight: "extrabold",
+                    fontFamily: "Montserrat, sans-serif",
+                    "&:hover": {
+                      color: "#eceff1",
+                      backgroundColor: "#03a9f4",
+                    },
+                  }}
+                  variant="outlined"
+                >
+                  {userAddress.slice(0, 5) + "..." + userAddress.slice(-5)}
+                </Button>:
+                <Button
+                  onClick={connectWallet}
+                  sx={{
+                    color: "#039be5",
+                    border: "1px solid #039be5",
+                    fontWeight: "extrabold",
+                    fontFamily: "Montserrat, sans-serif",
+                    "&:hover": {
+                      color: "#eceff1",
+                      backgroundColor: "#03a9f4",
+                    },
+                  }}
+                  variant="outlined"
+                  >
+                  Connect
+                  </Button>
+              }
+
             </li>
             <li>
               <User />
