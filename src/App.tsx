@@ -17,7 +17,7 @@ function App() {
         <Route path={"/upload"} element={<Upload/>}/>
         <Route path={"/sponsor"} element={<Sponsor/>}/>
         <Route path={"/profile"} element={<Profile/>}/>
-        <Route path={"/videoPlayer"} element={<VideoPlayer/>}/>
+        <Route path={"/videoPlayer/:address"} element={<VideoPlayer/>}/>
       </Routes>
     </HashRouter>
   );

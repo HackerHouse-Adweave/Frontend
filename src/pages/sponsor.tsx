@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { IoArrowBackCircle } from "react-icons/io5";
 
 const Sponsor = () => {
   const [formData, setFormData] = useState({
@@ -23,8 +24,13 @@ const Sponsor = () => {
   return (
     <>
       <div className="container m-auto mt-8 grid place-items-center font-sans text-xs">
+        <a className="w-8 mb-4" href="#/">
+          <IoArrowBackCircle className="w-8 h-8" />
+        </a>
         <div className="mb-4">
-          <p className="text-xl">To become a Sponsor, provide all the details below</p>
+          <p className="text-xl">
+            To become a Sponsor, provide all the details below
+          </p>
         </div>
         <div className="grid place-items-center">
           <form className="flex flex-col w-96" onSubmit={handleSubmit}>

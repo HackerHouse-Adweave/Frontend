@@ -37,10 +37,7 @@ const Navbar = () => {
         <div className="mt-3 mb-1 w-full ml-2.5">
           <ul className="flex flex-row no-underline gap-x-4 font-mont text-sm text-sky-500">
             <li className="mr-40 pl-12">
-              <a
-                className=" text-2xl font-alternate underline"
-                href="#"
-              >
+              <a className=" text-2xl font-alternate underline" href="#">
                 <img className="w-32 h-12" src={logo} alt="logo" />
               </a>
             </li>
@@ -57,9 +54,9 @@ const Navbar = () => {
                   border: "1px solid #039be5",
                   fontWeight: "extrabold",
                   fontFamily: "Montserrat, sans-serif",
-                  '&:hover': {
-                    color: '#eceff1',
-                    backgroundColor: '#03a9f4',
+                  "&:hover": {
+                    color: "#eceff1",
+                    backgroundColor: "#03a9f4",
                   },
                 }}
                 variant="outlined"

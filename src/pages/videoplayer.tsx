@@ -1,19 +1,120 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import video from "../videos/video1.mp4";
 import { IoArrowBackCircle } from "react-icons/io5";
+import Arweave from "arweave";
 
+const arweave = Arweave.init({})
+const emptyAsset = {
+  id: "",
+  tags: [],
+  owner: {
+    address: ""
+  },
+  fee: {
+    ar: "",
+    winston: ""
+  },
+  quantity: {
+    ar: "",
+    winston: ""
+  },
+  block: {
+    id: "",
+    timestamp: 0
+  },
+  data: {
+    size: "",
+    type: ""
+  }
+}
 const VideoPlayer = () => {
+  const [asset, setAsset] = useState(emptyAsset);
+  const [isLoading, setIsLoading] = useState(false);
+  const [notFound, setNotFound] = useState(false);
+
+  useEffect(()=>{
+    const path = window.location.hash.split("/");
+    if(!!path[2]) {
+      console.log("path: ", path[2]);
+      getAsset(path[2]);
+    }
+  }, [])
+
+  const getAsset = async (id: string) => {
+    if (id == undefined) {
+        setNotFound(true);
+        return;
+    }
+    try{
+        const queryObject = {
+            query:
+            `
+            {
+                transaction(
+                id:"${id}"
+                ) {
+            
+                    id
+                anchor
+                signature
+                recipient
+                owner {
+                  address
+                }
+                fee{
+                  ar
+                  winston
+                }
+                quantity{
+                  ar
+                  winston
+                }
+                data{
+                  size
+                  type
+                }
+                tags{
+                  name
+                  value
+                }
+                block{
+                  id
+                  timestamp
+                }
+                }
+            }
+            `,
+
+        };
+        setIsLoading(true);
+        const results = await arweave.api.post('/graphql', queryObject);
+        if (!!results.data.data.transaction) {
+            setAsset(results.data.data.transaction);
+        } else {
+            console.log("not found");
+            setNotFound(true);
+        }
+        setIsLoading(false);
+
+    }catch(err){
+        console.log("err: ", err);
+        setNotFound(true);
+    }
+
+}
+
+
   return (
     <>
       <div className="mt-4 ml-4">
-        <a className="w-fit" href="#/">
+        <a className="w-8" href="#/">
           <IoArrowBackCircle className="w-8 h-8" />
         </a>
         <div className="container m-auto mt-8 flex flex-auto gap-x-6 text-justify font-josefin font-normal">
           <div className="rounded-xl">
             <ReactPlayer
-              url={video}
+              url={`https://arweave.net/${asset.id}`}
               muted={true}
               playing={true}
               controls={true}

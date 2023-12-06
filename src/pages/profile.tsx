@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Switch from "@mui/material/Switch";
+import { IoArrowBackCircle } from "react-icons/io5";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
@@ -25,6 +26,9 @@ const Profile = () => {
   return (
     <>
       <div className="container m-auto grid place-items-center font-sans text-xs mt-8">
+      <a className="w-8 mb-4" href="#/">
+          <IoArrowBackCircle className="w-8 h-8" />
+        </a>
         <label className="text-xl" htmlFor="name">Choose file to Upload:</label>
         <input
           className="mb-4 h-8 pl-28 mt-4"
