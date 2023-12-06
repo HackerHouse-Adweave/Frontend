@@ -15,8 +15,13 @@
     "@types/react": "^18.2.41",
     "@types/react-dom": "^18.2.17",
     "arweave": "^1.14.4",
+    "browserify-zlib": "^0.2.0",
     "dropbox-chooser": "^0.0.3",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "path-browserify": "^1.0.1",
     "react": "^18.2.0",
+    "react-app-rewired": "^2.2.1",
     "react-dom": "^18.2.0",
     "react-dropdown-select": "^4.10.0",
     "react-file-picker": "^0.0.6",
@@ -30,9 +35,9 @@
   },
   "scripts": {
     "homepage": ".",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -54,7 +59,16 @@
     ]
   },
   "devDependencies": {
+    "assert": "^2.1.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.0",
+    "https-browserify": "^1.0.0",
+    "os-browserify": "^0.3.0",
+    "process": "^0.11.10",
     "react-dropbox-chooser": "^0.0.5",
-    "tailwindcss": "^3.3.6"
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "tailwindcss": "^3.3.6",
+    "url": "^0.11.3"
   }
 }

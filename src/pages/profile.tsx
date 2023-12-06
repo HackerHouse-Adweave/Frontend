@@ -1,87 +1,110 @@
 import { useState } from "react";
 import Switch from "@mui/material/Switch";
 import { IoArrowBackCircle } from "react-icons/io5";
-import WebIrys from "@irys/sdk";
+import {WebIrys} from "@irys/sdk";
 import Irys from "@irys/sdk";
+
 // import * as fs from "fs";
+import wallet from "../wallet.json";
+import { Button } from "@mui/material";
 // import dotenv from "dotenv";
 // dotenv.config();
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
 const Profile = () => {
-
- 
-//   // Returns a reference to an Irys node
-//   const getIrys = async () => {
-//     const url = "https://devnet.irys.xyz";
-//     // Devnet RPC URLs change often, use a recent one from https://chainlist.org/chain/80001
-//     const providerUrl = "";
-//     const token = "matic";
-//     const privateKey = process.env.PRIVATE_KEY;
-  
-//     const irys = new Irys({
-//       url, // URL of the node you want to connect to
-//       token, // Token used for payment
-//       key: privateKey, // ETH or SOL private key
-//       config: { providerUrl: providerUrl }, // Optional provider URL, only required when using Devnet
-//     });
-//     return irys;
-//   };
- 
-// const uploadImage = async () => {
-// 	const irys = await getIrys();
-// 	const fileToUpload = "./myNFT.png";
- 
-// 	// Get size of file
-// 	const { size } = await fs.promises.stat(fileToUpload);
-// 	// Get cost to upload "size" bytes
-// 	const price = await irys.getPrice(size);
-// 	console.log(`Uploading ${size} bytes costs ${irys.utils.fromAtomic(price)} ${token}`);
-// 	// Fund the node
-// 	await irys.fund(price);
- 
-// 	// Upload metadata
-// 	try {
-// 		const response = await irys.uploadFile(fileToUpload);
-// 		console.log(`File uploaded ==> https://gateway.irys.xyz/${response.id}`);
-// 	} catch (e) {
-// 		console.log("Error uploading file ", e);
-// 	}
-// };
-
-//   const getWebIrys = async () => {
-//     const arconnect = window.arweaveWallet;
-//     // await arconnect.connect(["ACCESS_ADDRESS", "ACCESS_PUBLIC_KEY", "SIGN_TRANSACTION", "SIGNATURE"]);
-//     const webIrys = new WebIrys({ url: "https://node1.irys.xyz", token: "arweave", wallet: { provider: arconnect } });
-//     await webIrys.ready();
-   
-//     return webIrys;
-//   };
-
-//   const fundIrysNode = async () => {
-//     try{
-//       const irys = await getWebIrys();
-      
-//       console.log(`wallet address = ${irys.address}`);
-//       try {
-//         const fundTx = await irys.fund(irys.utils.toAtomic(0.00000001));
-//         console.log(`Successfully funded ${irys.utils.fromAtomic(fundTx.quantity)} ${irys.token}`);
-//       } catch (e) {
-//         console.log("Error funding IrysNode ", e);
-//       }
-//     }catch(err){
-//       console.log(err)
-//     }
-//   }
-
-
   const [formData, setFormData] = useState({
     file: "",
     title: "",
     description: "",
     tags: "",
   });
+  const [sponsored, setSponsored] = useState(true);
+  const [fileToUpload, setFileToUpload] = useState(new File([], ""));
+
+
+  const handleSponsored = () => {
+    setSponsored(!sponsored);
+    console.log("sponsored", !sponsored)
+  }
+
+  const upload = async () => {
+    try{
+      // Connect to a node
+      const url = "https://node2.irys.xyz";
+      const token = "arweave";
+      // const key = JSON.parse(fs.readFileSync("../wallet.json").toString());
+      const key = wallet.toString();
+      const irys = new Irys({ url, token, key });
+      console.log("irys: ",irys)
+      
+      // Fund the node
+        const fundTx = await irys.fund(irys.utils.toAtomic(0.00000001));
+        console.log(`Successfully funded ${irys.utils.fromAtomic(fundTx.quantity)} ${irys.token}`);
+        // const fundTx = await irys.fund(irys.utils.toAtomic(0.05));
+      
+      // Tag your uploads
+      const tags = [{ name: "application-id", value: "my-tx-sequence" }];
+      
+      // Upload 10 transactions
+      // for (let i = 0; i < 10; i++) {
+        const receipt = await irys.upload("GM ", { tags });
+        console.log(`Transaction #2 uploaded at ${receipt.timestamp}`);
+      // }
+    }catch(err){
+      console.log("Err in upload: ",err)
+    }
+  }
+
+  const uploadFile = async () => {
+    try{
+        const webIrys = await getWebIrys();
+        // Your file
+        const tags = [{ name: "application-id", value: "MyNFTDrop" }];
+       
+        try {
+          const receipt = await webIrys.uploadFile(fileToUpload, { tags });
+          console.log(`File uploaded ==> https://gateway.irys.xyz/${receipt.id}`);
+        } catch (e) {
+          console.log("Error uploading file ", e);
+        }
+
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  const getWebIrys = async () => {
+    const arconnect = window.arweaveWallet;
+    // await arconnect.connect(["ACCESS_ADDRESS", "ACCESS_PUBLIC_KEY", "SIGN_TRANSACTION", "SIGNATURE"]);
+    const webIrys = new WebIrys({ 
+      url: "https://node1.irys.xyz", 
+      token: "arweave", 
+      wallet: { provider: arconnect } 
+    });
+    await webIrys.ready();
+   
+    return webIrys;
+  };
+
+  const fundIrysNode = async () => {
+    try{
+      const irys = await getWebIrys();
+      
+      console.log(`wallet address = ${irys.address}`);
+      try {
+        const fundTx = await irys.fund(irys.utils.toAtomic(0.00000001));
+        console.log(`Successfully funded ${irys.utils.fromAtomic(fundTx.quantity)} ${irys.token}`);
+      } catch (e) {
+        console.log("Error funding IrysNode ", e);
+      }
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+
+
 
   const handleChange = (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
@@ -90,14 +113,32 @@ const Profile = () => {
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    alert(
-      `File: ${formData.file}, Title: ${formData.title}, description: ${formData.description}, tags: ${formData.tags}`
-    );
+    if(sponsored){
+      upload();
+    }else{
+    const formData = new FormData();
+
+      if (fileToUpload) {
+        // Update the formData object
+        formData.append(
+            "myFile",
+            fileToUpload,
+            fileToUpload.name
+        );
+
+        // Details of the uploaded file
+        console.log(fileToUpload);
+        uploadFile();
+    }
+    }
+    // alert(
+    //   `File: ${formData.file}, Title: ${formData.title}, description: ${formData.description}, tags: ${formData.tags}`
+    // );
   };
   return (
     <>
       <div className="container m-auto grid place-items-center font-sans text-xs mt-8">
-      <a className="w-8 mb-4" href="#/">
+        <a className="w-8 mb-4" href="#/">
           <IoArrowBackCircle className="w-8 h-8" />
         </a>
         <label className="text-xl" htmlFor="name">Choose file to Upload:</label>
@@ -106,12 +147,33 @@ const Profile = () => {
           type="file"
           id="file"
           name="file"
-          value={formData.file}
-          onChange={handleChange}
+          onChange={(e) => {
+            // const file = e.target.files?.[0];
+            if (e.target.files?.length!=undefined) {
+              setFileToUpload(e.target.files?.[0]);
+            }
+          }}
         />
         <p>
           <span>Sponsored? </span>
-          <Switch {...label} />
+          <Switch 
+            {...label}  
+            className="mb-4"
+            defaultChecked
+            color="primary"
+            inputProps={{ "aria-label": "checkbox with default color" }}
+            onClick={handleSponsored}
+          />
+          <br/>
+          {
+            !sponsored && 
+            <Button 
+              // variant="contained"
+              onClick={fundIrysNode}
+            >
+              Fund Irys Node
+            </Button>
+          }
         </p>
         <form className="flex flex-col w-96" onSubmit={handleSubmit}>
           <label htmlFor="name">Name:</label>
@@ -135,7 +197,7 @@ const Profile = () => {
             onChange={handleChange}
           />
 
-          <label htmlFor="message">Tagst:</label>
+          <label htmlFor="message">Tags:</label>
           <input
             className="border-2 border-solid border-black rounded-lg mb-4 h-8 pl-2"
             placeholder="Tags..."
