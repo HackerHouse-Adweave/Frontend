@@ -21,13 +21,13 @@ const Videotab = ({asset}:any) => {
             />
             </video>
             <div className="text-xs">
-              <p className="text-md h-16 font-extrabold text-justify">
+              <p className="text-md h-6 truncate font-extrabold text-justify">
                 {tagsObject['Title']}
               </p>
               <p>{tagsObject['Protocol-Name']}</p>
               <div className="w-72 flex flex-row gap-x-2 text-slate-600">
-                <p></p>
-                <p className=""></p>
+                <p>200k</p>
+                <p className="">5/12/2023</p>
                 <FaCircleInfo className="w-3.5 h-3.5 place-items-end grid" />
               </div>
             </div>

@@ -20,7 +20,7 @@ const Adweave = () => {
       query: `
         {
             transactions(
-              first: 12,
+              first: 9,
               after: "${cursor}",
               tags: [{ name: "Type", values: ["video"] }]
             )

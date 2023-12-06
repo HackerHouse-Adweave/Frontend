@@ -4,52 +4,51 @@ import video from "../videos/video1.mp4";
 import { IoArrowBackCircle } from "react-icons/io5";
 import Arweave from "arweave";
 
-const arweave = Arweave.init({})
+const arweave = Arweave.init({});
 const emptyAsset = {
   id: "",
   tags: [],
   owner: {
-    address: ""
+    address: "",
   },
   fee: {
     ar: "",
-    winston: ""
+    winston: "",
   },
   quantity: {
     ar: "",
-    winston: ""
+    winston: "",
   },
   block: {
     id: "",
-    timestamp: 0
+    timestamp: 0,
   },
   data: {
     size: "",
-    type: ""
-  }
-}
+    type: "",
+  },
+};
 const VideoPlayer = () => {
   const [asset, setAsset] = useState(emptyAsset);
   const [isLoading, setIsLoading] = useState(false);
   const [notFound, setNotFound] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     const path = window.location.hash.split("/");
-    if(!!path[2]) {
+    if (!!path[2]) {
       console.log("path: ", path[2]);
       getAsset(path[2]);
     }
-  }, [])
+  }, []);
 
   const getAsset = async (id: string) => {
     if (id == undefined) {
-        setNotFound(true);
-        return;
+      setNotFound(true);
+      return;
     }
-    try{
-        const queryObject = {
-            query:
-            `
+    try {
+      const queryObject = {
+        query: `
             {
                 transaction(
                 id:"${id}"
@@ -85,25 +84,21 @@ const VideoPlayer = () => {
                 }
             }
             `,
-
-        };
-        setIsLoading(true);
-        const results = await arweave.api.post('/graphql', queryObject);
-        if (!!results.data.data.transaction) {
-            setAsset(results.data.data.transaction);
-        } else {
-            console.log("not found");
-            setNotFound(true);
-        }
-        setIsLoading(false);
-
-    }catch(err){
-        console.log("err: ", err);
+      };
+      setIsLoading(true);
+      const results = await arweave.api.post("/graphql", queryObject);
+      if (!!results.data.data.transaction) {
+        setAsset(results.data.data.transaction);
+      } else {
+        console.log("not found");
         setNotFound(true);
+      }
+      setIsLoading(false);
+    } catch (err) {
+      console.log("err: ", err);
+      setNotFound(true);
     }
-
-}
-
+  };
 
   return (
     <>
@@ -121,25 +116,39 @@ const VideoPlayer = () => {
             />
           </div>
           <div className="leading loose mt-6">
-            <p className="text-lg font-bold">Title: Amazing Video</p>
+            <p className="text-lg font-bold">Title: Permahacks Winner Trophy #1</p>
             <p>
-              <span className="text-lg font-bold">Desc:</span> In the vast
-              landscape of online content, a captivating video title serves as
-              the gateway to a world of entertainment, education, and wonder.
-              "Amazing Video" is not just a title; it's a promise, a beckoning
-              call to embark on an extraordinary voyage into unexplored
-              territories of excitement and discovery.
+              <span className="text-lg font-bold">Desc:</span> The Permaweb
+              Hackathon is an open-source event that encourages developers to
+              build innovative applications on top of the Arweave permaweb
+              protocol. Arweave is a decentralized storage network that
+              permanently stores data on the blockchain, ensuring that it
+              remains accessible and tamper-proof indefinitely.
             </p>
             <div className="flex flex-row gap-x-2 pt-2">
               <p className="text-lg pt-1.25 font-bold">Tags: </p>
-              <p className="p-1 text-sky-600 border border-solid border-sky-600">Sponsored</p>
-              <p className="p-1 text-sky-600 border border-solid border-sky-600">Comedy</p>
-              <p className="p-1 text-sky-600 border border-solid border-sky-600">Funny</p>
-              <p className="p-1 text-sky-600 border border-solid border-sky-600">Joke</p>
-              <p className="p-1 text-sky-600 border border-solid border-sky-600">Drama</p>
+              <p className="p-1 text-sky-600 border border-solid border-sky-600">
+                Sponsored
+              </p>
+              <p className="p-1 text-sky-600 border border-solid border-sky-600">
+                Comedy
+              </p>
+              <p className="p-1 text-sky-600 border border-solid border-sky-600">
+                Funny
+              </p>
+              <p className="p-1 text-sky-600 border border-solid border-sky-600">
+                Joke
+              </p>
+              <p className="p-1 text-sky-600 border border-solid border-sky-600">
+                Drama
+              </p>
             </div>
-            <p><span className="text-lg font-bold">Creator:</span> Amazing Guy</p>
-            <p><span className="text-lg font-bold">Views:</span> 20M</p>
+            <p>
+              <span className="text-lg font-bold">Creator:</span> Arweave
+            </p>
+            <p>
+              <span className="text-lg font-bold">Views:</span> 200K
+            </p>
           </div>
         </div>
       </div>
